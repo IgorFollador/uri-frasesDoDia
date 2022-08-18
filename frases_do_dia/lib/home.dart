@@ -20,11 +20,12 @@ class _HomeState extends State<Home> {
   var _fraseGerada = "Clique abaixo para gerar uma frase";
 
   void _gerarFrase() {
-    var numSort = Random().nextInt(_frases.length);
-
-    setState(() {
-      _fraseGerada = _frases[numSort];
-    });
+    var maxValue = _frases.length;
+    var numSort = Random().nextInt(maxValue);
+    while (numSort == Random().nextInt(maxValue))
+      setState(() {
+        _fraseGerada = _frases[numSort];
+      });
   }
 
   @override
