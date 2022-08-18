@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -17,13 +19,19 @@ class _HomeState extends State<Home> {
 
   var _fraseGerada = "Clique abaixo para gerar uma frase";
 
-  void _gerarFrase() {}
+  void _gerarFrase() {
+    var numSort = Random().nextInt(_frases.length);
+
+    setState(() {
+      _fraseGerada = _frases[numSort];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Frases do dia"),
+          title: Center(child: Text("Frases do dia")),
           backgroundColor: Colors.green,
         ),
         body: Center(
@@ -43,7 +51,16 @@ class _HomeState extends State<Home> {
                       color: Colors.black),
                 ),
                 ElevatedButton(
-                    onPressed: _gerarFrase, child: Text("Nova frase"))
+                  onPressed: _gerarFrase,
+                  child: Text(
+                    "Nova frase",
+                    style: const TextStyle(fontSize: 25),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                      elevation: 0,
+                      fixedSize: Size(220, 80)),
+                )
               ],
             ),
           ),
